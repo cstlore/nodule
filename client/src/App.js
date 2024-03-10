@@ -34,7 +34,7 @@ function App() {
                     <CodePart/>
                     <Terminal/>
                 </div>
-                <div className="ml-[20px] w-[20%] h-[95%]">
+                <div className="ml-[20px] w-[20%] h-[95%] z-[1000000000]">
                     <AiComponent/>
                 </div>
             </div>

@@ -20,10 +20,18 @@ code {
 
 *::-webkit-scrollbar {
     width: 3px;
-    height: 5px;
+    height: 0px;
     background-color: rgb(141, 141, 146);
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: rgb(83, 83, 104);
+}
+
+#Elem:hover #ElemLine {
+    background-color: white;
+    opacity: 50%;
+}
+#terminal-container{
+    color:white;
 }

@@ -4,6 +4,26 @@ const find = require("find-process");
 const path = require("path");
 const fs = require("fs");
 let mainWindow
+let filePath = null
+const os = require('os');
+const pty = require('node-pty');
+let shell, ptyProcess
+ipcMain.on('start_terminal', () => {
+    shell = os.platform() === "win32" ? "powershell.exe" : "bash";
+    ptyProcess = pty.spawn(shell, [], {
+        name: 'xterm-color',
+        cwd: process.env.HOME,
+        env: process.env
+    });
+    ptyProcess.on("data", (data) => {
+        mainWindow.webContents.send("terminal-incData", data);
+    });
+
+    ipcMain.on("terminal-into", (event, data) => {
+        console.log(data)
+        ptyProcess.write(data);
+    })
+})
 
 function createWindow() {
     // Create the browser window.
@@ -78,6 +98,9 @@ function createWindow() {
                 });
             }
         })
+    })
+    ipcMain.on('set_file', (event, p) => {
+        filePath = p
     })
     mainWindow.maximize();
     mainWindow.loadURL('http://localhost:3000').then()

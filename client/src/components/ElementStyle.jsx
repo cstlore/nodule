@@ -9,12 +9,23 @@ import Html from '../images/html-5.png'
 import Css from '../images/css-3.png'
 import Stop from '../images/StopFile.png'
 import Picture from '../images/picture.png'
+import Json from '../images/json.png'
+import {useContext, useEffect} from "react";
+import {PathContext} from "../contexts/PathContext";
 
+const {
+    ipcRenderer
+} = window.require("electron");
 export const ElementStyle = ({file, openDir}) => {
+    const {path, setPath, openedFiles, setOpenedFiles} = useContext(PathContext)
     const renderIcon = (ext, name) => {
-        if (ext === '.png' || ext === '.jpeg' || ext === '.svg' || ext === '.gif' || ext === '.raw' || ext === '.tiff' || ext === '.bmp' || ext === '.psd' || ext === '.raw') {
+        if (ext === '.png' || ext === '.jpeg' || ext === '.svg' || ext === '.gif' || ext === '.raw' || ext === '.tiff' || ext === '.bmp' || ext === '.psd' || ext === '.raw' || ext === '.ico') {
             return (
                 <img className="ml-[5px] h-[80%]" src={Picture}/>
+            )
+        } else if (ext === '.json') {
+            return (
+                <img className="ml-[5px] h-[80%]" src={Json}/>
             )
         } else if (name === '.gitignore') {
             return (
@@ -55,7 +66,18 @@ export const ElementStyle = ({file, openDir}) => {
             className="w-[90%] h-[20px] mt-[10px] flex items-center ml-[10px] cursor-default hover:bg-[#1D2C3E] rounded-[5px] ease-in-out duration-300"
             onClick={() => {
                 if (file.isFile) {
-
+                    ipcRenderer.send('set_file', file.path)
+                    if (openedFiles.files.includes(file)) {
+                        setOpenedFiles({
+                            viewFile: openedFiles.files.find((val) => val === file),
+                            files: openedFiles.files
+                        })
+                    } else {
+                        setOpenedFiles({
+                            viewFile: file,
+                            files: [...openedFiles.files, file]
+                        })
+                    }
                 }
             }}>
             {[...Array(file.margin)].map((x) => {
@@ -65,7 +87,6 @@ export const ElementStyle = ({file, openDir}) => {
                     </div>
                 )
             })}
-
             {!file.isFile &&
                 <img src={Chevron}
                      className="h-[80%] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:h-[90%]"
