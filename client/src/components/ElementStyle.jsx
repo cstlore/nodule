@@ -94,7 +94,7 @@ export const ElementStyle = ({file, openDir}) => {
                      onClick={() => openDir(file)}/>
             }
             {renderIcon(path_module.extname(file.path), file.name)}
-            <p className="font-MainFont text-[#ABB439] text-xs ml-[5px]">{file.name}</p>
+            <p className="font-MainFont text-[#C0D1EC] text-xs ml-[5px]">{file.name}</p>
         </div>
     )
 }

@@ -6,8 +6,15 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.18",
     "cross-env": "^7.0.3",
+    "framer-motion": "^11.0.12",
+    "json-loader": "^0.5.7",
+    "monaco-editor": "^0.47.0",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "path": "^0.12.7",
+    "postcss-import": "^16.0.1",
+    "postcss-nesting": "^12.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -16,7 +23,7 @@
     "xterm-addon-fit": "^0.8.0"
   },
   "scripts": {
-    "start": "cross-env BROWSER=none react-scripts start",
+    "start": "NODE_ENV=development webpack serve --config webpack.config.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,6 +47,20 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "sass": "^1.45.1",
+    "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.4.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
   }
 }

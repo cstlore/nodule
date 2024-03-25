@@ -10,7 +10,7 @@ let terminalEvent = null
 export const Terminal = () => {
     const term = new Term();
     const fitAddon = new FitAddon();
-    term.loadAddon(fitAddon);
+    term.loadAddon(fitAddon);//
     useEffect(() => {
         const myNode = document.querySelector('#terminal-container');
         myNode.innerHTML = '';
@@ -18,7 +18,6 @@ export const Terminal = () => {
         if (myNode) {
             term.open(document.querySelector('#terminal-container'));
             terminalEvent = term.onData(e => {
-                console.log(e)
                 ipcRenderer.send("terminal-into", e);
             });
             ipcRenderer.on('terminal-incData', (event, data) => {

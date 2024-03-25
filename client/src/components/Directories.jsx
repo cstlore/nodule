@@ -78,19 +78,19 @@ export const Directories = () => {
                 :
                 <div className="w-[100%] h-[100%]">
                     <div className="w-[70%] h-[2px] bg-white ml-[15%] mt-[10px]"/>
-                    <p className="font-MainFont w-[60%] ml-[20%] text-center text-sm text-[#AEA935] mt-[10px]">Ни один
+                    <p className="font-BackFont w-[80%] ml-[10%] text-center text-sm text-[#C0D1EC] mt-[10px]">Ни один
                         проект не
                         открыт</p>
                     <div
-                        className="w-[60%] h-[50px] bg-white ml-[20%] rounded-[10px] mt-[10px] flex items-center cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:ml-[calc(20%-10px)]"
+                        className="w-[60%] h-[50px] justify-center bg-white ml-[20%] rounded-[10px] mt-[10px] flex items-center cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:ml-[calc(20%-5px)]"
                         onClick={() => {
                             ipcRenderer.send('open_project')
                         }}>
-                        <p className="w-[100%] font-MainFont text-sm text-center">Открыть папку</p>
+                        <p className="w-[80%] font-MainFont text-xs text-center">Открыть папку</p>
                     </div>
                     <div
-                        className="w-[60%] h-[50px] bg-white ml-[20%] rounded-[10px] mt-[50px] flex items-center cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:ml-[calc(20%-10px)]">
-                        <p className="w-[100%] font-MainFont text-sm text-center">Клонировать с GitHub</p>
+                        className="w-[60%] justify-center h-[50px] bg-white ml-[20%] rounded-[10px] mt-[50px] flex items-center cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:ml-[calc(20%-5px)]">
+                        <p className="w-[80%] font-MainFont text-xs text-center">Клонировать с GitHub</p>
                     </div>
                 </div>
             }

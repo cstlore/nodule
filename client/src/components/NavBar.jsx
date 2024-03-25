@@ -17,7 +17,7 @@ export const NavBar = () => {
     }, [time]);
     return (
         <div className="w-[100%] h-[20px] fixed flex mt-[5px]">
-            <img src={Logo} className="ml-[40px] scale-[1.3]"/>
+            <img src={Logo} className="ml-[40px] scale-[1.3] opacity-[1]"/>
             <div
                 className="w-[calc(calc(calc(100%-40px)-32.5px)-50px)] h-[20px] bg-[#26374A] ml-[20px] rounded-[20px] flex justify-end items-center">
                 <img

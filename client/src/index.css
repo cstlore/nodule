@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -32,6 +33,44 @@ code {
     background-color: white;
     opacity: 50%;
 }
-#terminal-container{
-    color:white;
+
+#terminal-container {
+    color: white;
+}
+
+.codicon-symbol-keyword:before {
+    content: " " !important;
+    width: 16px;
+    height: 16px;
+    background-image: url("./images/codicon.png");
+    background-size: cover;
+}
+
+.codicon-symbol-variable:before {
+    content: " " !important;
+    width: 16px;
+    height: 16px;
+    background-image: url("./images/codicon.png");
+    background-size: cover;
+}
+
+.codicon-symbol-file:before {
+    content: " " !important;
+    width: 16px;
+    height: 16px;
+    background-image: url("./images/File.svg");
+    background-size: cover;
+}
+
+span .highlight {
+    color: #52FFFCFF !important;
+}
+
+span{
+    opacity: 0.9;
+}
+
+.editor-widget{
+    border-radius: 5px !important;
+    overflow: hidden;
 }

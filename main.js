@@ -8,6 +8,10 @@ let filePath = null
 const os = require('os');
 const pty = require('node-pty');
 let shell, ptyProcess
+const langDetector = require('language-detect')
+const langMapper = require('language-map')
+const chokidar = require("chokidar");
+let watcher = null
 ipcMain.on('start_terminal', () => {
     shell = os.platform() === "win32" ? "powershell.exe" : "bash";
     ptyProcess = pty.spawn(shell, [], {
@@ -58,6 +62,20 @@ function createWindow() {
                     if (err)
                         console.log(err);
                     else {
+                        watcher = chokidar.watch(response.filePaths[0], {depth: 0, persistent: true});
+                        watcher
+                            .on('add', function (path) {
+                                console.log('File', path, 'has been added');
+                            })
+                            .on('change', function (path) {
+                                console.log('File', path, 'has been changed');
+                            })
+                            .on('unlink', function (path) {
+                                console.log('File', path, 'has been removed');
+                            })
+                            .on('error', function (error) {
+                                console.error('Error happened', error);
+                            })
                         mainWindow.webContents.send('set_path', {
                             path: response.filePaths[0], render: [files.map((file) => {
                                 return {
@@ -99,8 +117,58 @@ function createWindow() {
             }
         })
     })
+    ipcMain.on('open_file', (event, p) => {
+            if (typeof p === 'string') {
+                fs.readFile(p, 'utf8', function (err, data) {
+                    if (err) throw err;
+                    // async way
+                    let lang = ''
+                    langDetector(p, (err, language) => {
+                        if (err) {
+                            console.log(err)
+                            lang = 'plaintext'
+                        } else {
+                            lang = langMapper[language].aceMode
+                        }
+                        // sync way
+                        lang = langMapper[langDetector.sync(p)].aceMode
+                        mainWindow.webContents.send('open_file', {text: data, language: lang, filePath: filePath})
+                    });
+                })
+            }
+        }
+    )
     ipcMain.on('set_file', (event, p) => {
+        if (filePath) {
+            fs.unwatchFile(filePath)
+        }
         filePath = p
+        fs.watchFile(filePath, (curr, prev) => {
+            fs.readFile(filePath, 'utf8', function (err, data) {
+                if (err) throw err;
+                // async way
+                let lang = ''
+                langDetector(p, (err, language) => {
+                    if (err) {
+                        console.log(err)
+                        lang = 'plaintext'
+                    } else {
+                        lang = langMapper[language].aceMode
+                    }
+                    // sync way
+                    lang = langMapper[langDetector.sync(p)].aceMode
+                    mainWindow.webContents.send('open_file', {text: data, language: lang, filePath: filePath})
+                });
+            })
+        });
+    })
+    ipcMain.on('save_file', (event, {file_path, text}) => {
+        fs.writeFile(file_path, text, (err) => {
+            if (err)
+                console.log(err);
+            else {
+            }
+        })
     })
     mainWindow.maximize();
     mainWindow.loadURL('http://localhost:3000').then()
@@ -122,7 +190,15 @@ app.whenReady().then(async () => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') app.quit()
+    if (process.platform !== 'darwin') {
+        find('port', 3000)
+            .then(function (list) {
+                if (list[0] != null) {
+                    process.kill(list[0].pid, 'SIGKILL');
+                    app.quit()
+                }
+            }).catch(e => console.log(e))
+    }
 })
 
 

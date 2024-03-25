@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      fontFamily:{
-        'MainFont': ['JetBrains Mono']
-      }
+    content: [
+        "./src/**/*.{js,jsx,ts,tsx}",
+    ],
+    theme: {
+        extend: {
+            fontFamily: {
+                'MainFont': ['JetBrains Mono'],
+                'BackFont': ['Open Sans']
+            }
+        },
     },
-  },
-  plugins: [],
+    plugins: [],
 }
 
