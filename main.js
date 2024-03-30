@@ -3,7 +3,7 @@ const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const find = require("find-process");
 const path = require("path");
 const fs = require("fs");
-let mainWindow
+let mainWindow, settingsWindow
 let filePath = null
 const os = require('os');
 const pty = require('node-pty');
@@ -38,6 +38,23 @@ function createWindow() {
             enableRemoteModule: true,
         },
         icon: path.join(__dirname, 'icon.ico')
+    })
+    ipcMain.on('open_settings', function () {
+        settingsWindow = new BrowserWindow({
+            width: 960, height: 540, frame: 0, webPreferences: {
+                contextIsolation: false,
+                nodeIntegration: true,
+                enableRemoteModule: true,
+            },
+            icon: path.join(__dirname, 'icon.ico'),
+            maximizable: false,
+            title: 'Nodule - Настройки'
+        })
+        settingsWindow.loadURL('http://localhost:3000/settings').then()
+        settingsWindow.openDevTools()
+        ipcMain.on('close_settings', function () {
+            settingsWindow.close()
+        })
     })
     ipcMain.on('close', function () {
         find('port', 3000)

@@ -31,7 +31,7 @@ export const Terminal = () => {
         }
     }, []);
     return (
-        <div className="w-[100%] h-[29%] bg-[#08142D] mt-[1%] rounded-b-[10px]">
+        <div className="w-[100%] h-[29%] bg-[#2E3440] mt-[1%] rounded-b-[10px]">
             <div id="terminal-container"
                  className="w-[calc(100%-10px)] pl-[5px] h-[calc(100%-10px)] pt-[5px] overflow-y-hidden !font-MainFont">
             </div>

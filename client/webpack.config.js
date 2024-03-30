@@ -15,6 +15,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "./dist"),
         filename: production ? '[name].[contenthash].js' : '[name].js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -80,7 +81,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Webpack & React",
             template: "./public/index.html",
-            favicon: "./public/favicon.ico"
+            favicon: "./public/favicon.ico",
+            publicPath: '/',
         }),
         new MiniCssExtractPlugin({
             filename: production ? '[name].[contenthash].css' : '[name].css',
@@ -90,6 +92,7 @@ module.exports = {
     devServer: {
         port: 3000,
         hot: true,
+        historyApiFallback: true,
     },
     mode: production ? 'production' : 'development'
 };

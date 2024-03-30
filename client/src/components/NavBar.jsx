@@ -16,24 +16,32 @@ export const NavBar = () => {
         return () => clearInterval(interval);
     }, [time]);
     return (
-        <div className="w-[100%] h-[20px] fixed flex mt-[5px]">
+        <div id="NavBar" className="w-[100%] h-[20px] fixed flex mt-[10px]">
             <img src={Logo} className="ml-[40px] scale-[1.3] opacity-[1]"/>
             <div
                 className="w-[calc(calc(calc(100%-40px)-32.5px)-50px)] h-[20px] bg-[#26374A] ml-[20px] rounded-[20px] flex justify-end items-center">
                 <img
+                    id="navElements"
                     className="w-[19px] mr-[30px] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:scale-[0.9]"
-                    src={Settings}/>
+                    src={Settings}
+                    onClick={() => {
+                        ipcRenderer.send('open_settings')
+                    }}
+                />
                 <div
+                    id="navElements"
                     className="w-[15px] h-[15px] bg-[#248722] rounded-full mr-[30px] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:scale-[0.9]"
                     onClick={() => {
                         ipcRenderer.send('hide')
                     }}/>
                 <div
+                    id="navElements"
                     className="w-[15px] h-[15px] bg-[#AFB937] rounded-full mr-[30px] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:scale-[0.9]"
                     onClick={() => {
                         ipcRenderer.send('open')
                     }}/>
                 <div
+                    id="navElements"
                     className="w-[15px] h-[15px] bg-[#B12020] rounded-full mr-[10px] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:scale-[0.9]"
                     onClick={() => {
                         ipcRenderer.send('close')

@@ -66,11 +66,19 @@ span .highlight {
     color: #52FFFCFF !important;
 }
 
-span{
-    opacity: 0.9;
-}
-
-.editor-widget{
+.editor-widget {
     border-radius: 5px !important;
     overflow: hidden;
+}
+
+.monaco-editor .squiggly-error {
+    background: url("./images/error.png") repeat-x bottom left !important;
+}
+
+#NavBar {
+    -webkit-app-region: drag;
+}
+
+#navElements {
+    -webkit-app-region: no-drag;
 }

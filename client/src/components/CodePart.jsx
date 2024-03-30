@@ -16,7 +16,7 @@ import {motion} from "framer-motion"
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import Editor from '../styles/editor.json';
 
-const images_map = [Picture, Json, Stop, Dir, Python, Js, Cpp, Css, Html, File]
+const images_map = [Json, Python, Js, Cpp, Css, Html]
 const {
     ipcRenderer
 } = window.require("electron");
@@ -37,7 +37,7 @@ export const CodePart = () => {
                     attr.src = image;
                     // update the img index to state
                     setImageIndex((imageIndex) =>
-                        imageIndex === 9 ? 0 : imageIndex + 1
+                        imageIndex === 5 ? 0 : imageIndex + 1
                     );
                     // update the src in state.
                     setImage(attr.src);
@@ -90,7 +90,7 @@ export const CodePart = () => {
                 <img className="ml-[5px] h-[80%] pr-[5px]" src={File}/>
             )
         }
-    }
+    }//
     useEffect(() => {
         ipcRenderer.on('open_file', (event, {text: text, language: language, filePath: filePath}) => {
             monaco.editor.getModels().forEach(model => model.dispose());
@@ -186,7 +186,7 @@ export const CodePart = () => {
                                          className="w-fit relative h-[100%] bg-[#273B53] mr-[20px] rounded-t-[10px] inline-block ease-in-out duration-300 hover:border-white"
                                          onClick={() => {
                                              ipcRenderer.send('save_file', {
-                                                 file_path: filePath,
+                                                 file_path: openedFiles.viewFile.path,
                                                  text: editor.getValue()
                                              })
                                              ipcRenderer.send('set_file', file.path)
@@ -220,52 +220,52 @@ export const CodePart = () => {
             {
                 (Object.keys(openedFiles.viewFile).length === 0 || !openedFiles.viewFile) ?
                     <div
-                        className="flex justify-center items-center w-[100%] h-[calc(100%-35px)] bg-[#08142D] mt-[10px] rounded-t-[10px] text-white">
+                        className="flex justify-center items-center w-[100%] h-[calc(100%-35px)] bg-[#2E3440] mt-[10px] rounded-t-[10px] text-white">
                         <div className="rounded-md p-4 max-w-sm w-full mx-auto">
                             <div className="animate-pulse flex space-x-4 scale-[1.3]">
                                 <div className="flex-1 space-y-6 py-1">
-                                    <div className="h-2 bg-slate-700 rounded"></div>
+                                    <div className="h-2 bg-slate-300 rounded"></div>
                                     <div className="space-y-3">
                                         <div className="grid grid-cols-3 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-2"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-2"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
-                                        <div className="h-2 bg-slate-700 rounded"></div>
+                                        <div className="h-2 bg-slate-300 rounded"></div>
                                     </div>
                                     <div className="space-y-2">
                                         <div className="grid grid-cols-4 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-2"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-2"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
                                         <div className="grid grid-cols-6 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-3"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-3"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-2"></div>
                                         </div>
                                         <div className="grid grid-cols-6 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-5"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-5"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
                                         <div className="grid grid-cols-4 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-2"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-2"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
                                         </div>
                                         <div className="grid grid-cols-6 gap-4">
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-3"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-                                            <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-3"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-1"></div>
+                                            <div className="h-2 bg-slate-300 rounded col-span-2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -273,7 +273,7 @@ export const CodePart = () => {
                         </div>
                     </div> :
                     <div id="editor"
-                         className="w-[100%] h-[calc(100%-35px)] bg-[#08142D] mt-[10px] rounded-t-[10px] overflow-hidden">
+                         className="w-[100%] h-[calc(100%-35px)] bg-[#2E3440] mt-[10px] rounded-t-[10px] overflow-hidden">
                     </div>
             }
         </div>
