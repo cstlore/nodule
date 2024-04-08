@@ -9,6 +9,7 @@
     "app": "concurrently \"npm run start --prefix client\" \"wait-on http://127.0.0.1:3000 && nodemon --watch . --exec electron .\" -k",
     "prod": "electron ."
   },
+  "homepage": "./",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -36,6 +37,7 @@
     "chokidar": "^3.6.0",
     "find-process": "^1.4.7",
     "fs": "^0.0.1-security",
+    "g4f": "^1.4.3",
     "lang-map": "^0.4.0",
     "language-detect": "^1.1.0",
     "language-map": "^1.5.0",

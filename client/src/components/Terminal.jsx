@@ -21,6 +21,7 @@ export const Terminal = () => {
                 ipcRenderer.send("terminal-into", e);
             });
             ipcRenderer.on('terminal-incData', (event, data) => {
+                console.log(data)
                 term.write(data);
             })
             fitAddon.fit();//

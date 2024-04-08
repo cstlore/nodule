@@ -10,9 +10,12 @@ const pty = require('node-pty');
 let shell, ptyProcess
 const langDetector = require('language-detect')
 const langMapper = require('language-map')
-const chokidar = require("chokidar");
-let watcher = null
+const {G4F} = require("g4f");
+const g4f = new G4F();
 ipcMain.on('start_terminal', () => {
+    fs.readFile(path.join(__dirname, 'settings.json'), 'utf8', function (err, data) {
+        mainWindow.webContents.send('set_settings', data)
+    })
     shell = os.platform() === "win32" ? "powershell.exe" : "bash";
     ptyProcess = pty.spawn(shell, [], {
         name: 'xterm-color',
@@ -39,6 +42,11 @@ function createWindow() {
         },
         icon: path.join(__dirname, 'icon.ico')
     })
+    fs.watchFile(path.join(__dirname, 'settings.json'), (curr, prev) => {
+        fs.readFile(path.join(__dirname, 'settings.json'), 'utf8', function (err, data) {
+            mainWindow.webContents.send('set_settings', data)
+        })
+    });
     ipcMain.on('open_settings', function () {
         settingsWindow = new BrowserWindow({
             width: 960, height: 540, frame: 0, webPreferences: {
@@ -71,6 +79,15 @@ function createWindow() {
     ipcMain.on('open', function () {
         mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize()
     });
+    ipcMain.on('send_message', async (event, message) => {
+        const options = {
+            provider: g4f.providers.Liaobots,
+            model: "gpt-4",
+            proxy: ""
+        };
+        const text = await g4f.chatCompletion([{role: 'user', content: message}], options);
+        mainWindow.webContents.send('view_message', text);
+    })
     ipcMain.on('open_project', () => {
         dialog.showOpenDialog({properties: ['openDirectory']}).then(function (response) {
             if (!response.canceled) {
@@ -79,20 +96,6 @@ function createWindow() {
                     if (err)
                         console.log(err);
                     else {
-                        watcher = chokidar.watch(response.filePaths[0], {depth: 0, persistent: true});
-                        watcher
-                            .on('add', function (path) {
-                                console.log('File', path, 'has been added');
-                            })
-                            .on('change', function (path) {
-                                console.log('File', path, 'has been changed');
-                            })
-                            .on('unlink', function (path) {
-                                console.log('File', path, 'has been removed');
-                            })
-                            .on('error', function (error) {
-                                console.error('Error happened', error);
-                            })
                         mainWindow.webContents.send('set_path', {
                             path: response.filePaths[0], render: [files.map((file) => {
                                 return {

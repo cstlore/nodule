@@ -21,43 +21,43 @@ export const ElementStyle = ({file, openDir}) => {
     const renderIcon = (ext, name) => {
         if (ext === '.png' || ext === '.jpeg' || ext === '.svg' || ext === '.gif' || ext === '.raw' || ext === '.tiff' || ext === '.bmp' || ext === '.psd' || ext === '.raw' || ext === '.ico') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Picture}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Picture}/>
             )
         } else if (ext === '.json') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Json}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Json}/>
             )
         } else if (name === '.gitignore') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Stop}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Stop}/>
             )
         } else if (ext === '') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Dir}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Dir}/>
             )
         } else if (ext === '.py') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Python}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Python}/>
             )
         } else if (ext === '.js') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Js}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Js}/>
             )
         } else if (ext === '.cpp') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Cpp}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Cpp}/>
             )
         } else if (ext === '.js') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Css}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Css}/>
             )
         } else if (ext === '.html' || ext === '.htm') {
             return (
-                <img className="ml-[5px] h-[80%]" src={Html}/>
+                <img className="ml-[5px] h-[80%] rounded" src={Html}/>
             )
         } else {
             return (
-                <img className="ml-[5px] h-[80%]" src={File}/>
+                <img className="ml-[5px] h-[80%] rounded" src={File}/>
             )
         }
     }

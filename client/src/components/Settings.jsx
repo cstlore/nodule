@@ -1,5 +1,6 @@
 import Logo from "../images/icon.png";
 import Minus from '../images/minus.png'
+import Loupe from '../images/loupe.png'
 import {useEffect} from "react";
 
 const {
@@ -21,7 +22,14 @@ export const Settings = () => {
                      }}/>
             </div>
             <div className="w-[100%] h-[calc(100%-20px)] flex items-center">
-                <div className="w-[20%] h-[90%] border-r-[2px] border-white">
+                <div className="w-[20%] h-[100%] border-r-[5px] border-[#20252F]">
+                    <div className="flex w-[90%] h-[20px] ml-[5%] mt-[20px] rounded-md bg-slate-300 items-center">
+                        <img src={Loupe} className="h-[100%] scale-[0.9] ml-[5px] float-left"/>
+                        <input
+                            className="overflow-auto outline-none bg-transparent ml-[10px] mr-[5px] font-MainFont h-[80%] text-xs"/>
+                    </div>
+                </div>
+                <div className="w-[80%] h-[100%]">
 
                 </div>
             </div>

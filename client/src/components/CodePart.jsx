@@ -93,6 +93,7 @@ export const CodePart = () => {
     }//
     useEffect(() => {
         ipcRenderer.on('open_file', (event, {text: text, language: language, filePath: filePath}) => {
+            console.log(text)
             monaco.editor.getModels().forEach(model => model.dispose());
             monaco.editor.defineTheme('NoduleIDE', Editor);
             editor = monaco.editor.create(document.querySelector('#editor'), {
@@ -138,7 +139,7 @@ export const CodePart = () => {
                                             default: {duration: 2}
                                         }}
                                     >
-                                        <img id="logo" src={image} className="h-[80%] mt-[10 run %] ml-[-20px]"/>
+                                        <img id="logo" src={image} className="rounded scale-[0.8] h-[80%] ml-[-20px]"/>
                                     </motion.div>
                                 </div>
                                 <p className="text-white font-MainFont text-sm ml-auto mr-[20px]">Откройте файл</p>
