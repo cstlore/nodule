@@ -192,7 +192,7 @@ function createWindow() {
     })
     mainWindow.maximize();
     mainWindow.loadURL('http://localhost:3000').then()
-    mainWindow.openDevTools()
+    //mainWindow.openDevTools()
 }
 
 // This method will be called when Electron has finished

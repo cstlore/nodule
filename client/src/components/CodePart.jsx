@@ -90,8 +90,8 @@ export const CodePart = () => {
                 <img className="ml-[5px] h-[80%] pr-[5px]" src={File}/>
             )
         }
-    }//
-    useEffect(() => {
+    }
+    useEffect(()=>{
         ipcRenderer.on('open_file', (event, {text: text, language: language, filePath: filePath}) => {
             console.log(text)
             monaco.editor.getModels().forEach(model => model.dispose());
@@ -116,6 +116,9 @@ export const CodePart = () => {
             });
             setWasSaved(true)
         })
+        return ()=>{
+            ipcRenderer.removeAllListeners('open_file')
+        }
     }, [])
     useEffect(() => {
         ipcRenderer.send('open_file', openedFiles.viewFile.path)

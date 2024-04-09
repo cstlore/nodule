@@ -17,18 +17,21 @@ export const Terminal = () => {
         ipcRenderer.removeAllListeners('terminal-incData')
         if (myNode) {
             term.open(document.querySelector('#terminal-container'));
-            terminalEvent = term.onData(e => {
-                ipcRenderer.send("terminal-into", e);
-            });
             ipcRenderer.on('terminal-incData', (event, data) => {
                 console.log(data)
                 term.write(data);
             })
+            terminalEvent = term.onData(e => {
+                ipcRenderer.send("terminal-into", e);
+            });
             fitAddon.fit();//
             ipcRenderer.send('start_terminal')
             window.addEventListener('resize', () => {
                 fitAddon.fit();
             })
+        }
+        return () => {
+            ipcRenderer.removeAllListeners('terminal-incData')
         }
     }, []);
     return (

@@ -8,7 +8,7 @@ const {
 export const AiComponent = () => {
     const [messages, setMessages] = useState([]);
     useEffect(() => {
-        ipcRenderer.removeAllListeners()
+        ipcRenderer.removeAllListeners('view_message')
         ipcRenderer.on('view_message', (error, data) => {
             setMessages([...messages, {role: 'answer', content: data}])
         })
