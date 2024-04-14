@@ -1,6 +1,7 @@
 # Nodule - продвинутая ide (в разработке)
-![photo_2024-03-23_23-00-14](https://github.com/cstlore/nodule/assets/128278933/160edbac-9b16-406c-a45c-bb3bfec650ea)
+![photo_2024-04-14_19-37-43](https://github.com/cstlore/nodule/assets/128278933/ecf6f022-ddb2-49fd-881f-8b8f9e8228d8)
 ## Запуск Nodule:
+
 ```
 npm install
 cd client
