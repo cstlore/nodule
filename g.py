@@ -1,1 +1,1 @@
-sfsdfdj
+print('Hello')

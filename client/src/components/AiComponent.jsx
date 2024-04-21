@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import Chevron from '../images/chevron.svg'
 import Highlight from 'react-highlight'
+import Copy from '../images/copy.png'
 
 const {
     ipcRenderer
@@ -51,9 +52,17 @@ export const AiComponent = () => {
                                             text.shift()
                                             text = text.join('\n')
                                             const lang = part.split('\n')[0]
-                                            return <div className="rounded-[30px] overflow-hidden"><Highlight className={'language-' + lang}>
-                                                {text}
-                                            </Highlight></div>
+                                            return <div
+                                                className="rounded-[20px] overflow-hidden bg-[#2e2a33]">
+                                                <div className="w-[100%] h-[20px] bg-[#19171cdd] flex">
+                                                    <p className="text-white text-sm ml-[8px] opacity-[0.6]">{lang}</p>
+                                                    <img className="ml-auto mr-[10px] opacity-[0.6] scale-[0.8] ease-in-out duration-300 рщмук"
+                                                         src={Copy}/>
+                                                </div>
+                                                <Highlight className={'language-' + lang}>
+                                                    {text}
+                                                </Highlight>
+                                            </div>
                                         }
                                         return (
                                             <div>

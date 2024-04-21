@@ -21,49 +21,49 @@ export const ElementStyle = ({file, openDir}) => {
     const renderIcon = (ext, name) => {
         if (ext === '.png' || ext === '.jpeg' || ext === '.svg' || ext === '.gif' || ext === '.raw' || ext === '.tiff' || ext === '.bmp' || ext === '.psd' || ext === '.raw' || ext === '.ico') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Picture}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Picture}/>
             )
         } else if (ext === '.json') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Json}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Json}/>
             )
         } else if (name === '.gitignore') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Stop}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Stop}/>
             )
         } else if (ext === '') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Dir}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Dir}/>
             )
         } else if (ext === '.py') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Python}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Python}/>
             )
         } else if (ext === '.js') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Js}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Js}/>
             )
         } else if (ext === '.cpp') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Cpp}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Cpp}/>
             )
         } else if (ext === '.js') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Css}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Css}/>
             )
         } else if (ext === '.html' || ext === '.htm') {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={Html}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={Html}/>
             )
         } else {
             return (
-                <img className="ml-[5px] h-[80%] rounded" src={File}/>
+                <img className="ml-[5px] shrink-0 h-[80%] rounded" src={File}/>
             )
         }
     }
     return (
         <div
-            className="w-[90%] h-[20px] mt-[10px] flex items-center ml-[10px] cursor-default hover:bg-[#1D2C3E] rounded-[5px] ease-in-out duration-300"
+            className="h-[20px] mt-[10px] min-w-[90%] inline-flex items-center ml-[10px] cursor-default hover:bg-[#1D2C3E] rounded-[5px] ease-in-out duration-300"
             onClick={() => {
                 if (file.isFile) {
                     ipcRenderer.send('set_file', file.path)
@@ -82,19 +82,19 @@ export const ElementStyle = ({file, openDir}) => {
             }}>
             {[...Array(file.margin)].map((x) => {
                 return (
-                    <div className="h-[100%] w-[1em] flex items-center justify-center">
+                    <div className="h-[100%] w-[1em] shrink-0 flex items-center justify-center">
                         <div className="w-[3px] h-[3px] rounded-full bg-white opacity-[0.3]"/>
                     </div>
                 )
             })}
             {!file.isFile &&
                 <img src={Chevron}
-                     className="h-[80%] cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:h-[90%]"
+                     className="h-[80%] shrink-0 cursor-pointer ease-in-out duration-300 hover:opacity-[0.9] hover:h-[90%]"
                      style={{transform: `${file.closed ? "rotate(180deg)" : "rotate(270deg)"}`}}
                      onClick={() => openDir(file)}/>
             }
             {renderIcon(path_module.extname(file.path), file.name)}
-            <p className="font-MainFont text-[#C0D1EC] text-xs ml-[5px]">{file.name}</p>
+            <p className="font-MainFont shrink-0 text-[#C0D1EC] text-xs ml-[5px]">{file.name}</p>
         </div>
     )
 }
