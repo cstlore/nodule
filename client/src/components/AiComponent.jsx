@@ -55,9 +55,13 @@ export const AiComponent = () => {
                                             return <div
                                                 className="rounded-[20px] overflow-hidden bg-[#2e2a33]">
                                                 <div className="w-[100%] h-[20px] bg-[#19171cdd] flex">
-                                                    <p className="text-white text-sm ml-[8px] opacity-[0.6]">{lang}</p>
-                                                    <img className="ml-auto mr-[10px] opacity-[0.6] scale-[0.8] ease-in-out duration-300 рщмук"
-                                                         src={Copy}/>
+                                                    <p className="text-white text-sm ml-[10px] opacity-[0.6]">{lang}</p>
+                                                    <img
+                                                        className="ml-auto mr-[10px] opacity-[0.6] scale-[0.8] ease-in-out duration-300 hover:opacity-[1]"
+                                                        src={Copy} onClick={(e) => {
+                                                        const copyText = e.target.parentElement.parentElement.lastChild.textContent
+                                                        navigator.clipboard.writeText(copyText)
+                                                    }}/>
                                                 </div>
                                                 <Highlight className={'language-' + lang}>
                                                     {text}
